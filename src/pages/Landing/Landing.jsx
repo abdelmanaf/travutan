@@ -16,6 +16,7 @@ const Landing = ({user, destinations}) => {
           ))
         }
       </div>
+      
     </main>
   )
 }
