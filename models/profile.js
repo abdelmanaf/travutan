@@ -1,22 +1,19 @@
-import mongoose from 'mongoose'
+import mongoose from 'mongoose';
 
-const Schema = mongoose.Schema
-
+const Schema = mongoose.Schema;
 const profileSchema = new Schema(
   {
-    user : String,
-    destinations:[{
-      type: Schema.Types.ObjectId, 
-      ref: 'Destination'
-    }]
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+    },
+    destinations: [{}],
   },
   {
     timestamps: true,
   }
-  )
-  
-  const Profile = mongoose.model('Profile', profileSchema)
-  
-  export {
-    Profile
-  }
+);
+
+const Profile = mongoose.model('Profile', profileSchema);
+
+export { Profile };
