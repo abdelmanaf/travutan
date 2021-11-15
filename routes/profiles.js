@@ -9,6 +9,8 @@ const router = Router()
 router.use(decodeUserFromToken)
 
 router.get('/', checkAuth, profileCtrl.show);
+router.post('/createOrUpdateProfileDestination/user/:userId/dest/:destId', checkAuth, profileCtrl.createOrUpdateProfileDestination);
+router.post('/removeProfileDestination/user/:userId/dest/:destId', checkAuth, profileCtrl.removeProfileDestination);
 
 
 

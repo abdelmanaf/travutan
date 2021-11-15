@@ -36,7 +36,7 @@ function show(req, res) {
 function deleteDestination(req, res) {
     const id = req.params.id;
     Destination.findOneAndDelete(id).then(destination => {
-            res.status(200).json(destination)
+            res.status(200)
         })
         .catch(err => {
             res.json(err)

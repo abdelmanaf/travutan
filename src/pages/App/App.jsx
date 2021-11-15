@@ -12,7 +12,7 @@ import Landing from '../Landing/Landing'
 import Users from '../Users/Users'
 import SearchList from '../SearchList/SearchList'
 import Destinations from '../Destinations/Destinations'
-
+import DestinationDetail from '../Destinations/Detail'
 import SearchShow from '../SearchShow/SearchShow'
 
 // Services imports
@@ -41,17 +41,27 @@ class App extends Component {
 
 	async componentDidMount(){
 		const allDestinations =  await backEndService.getAll()
+		const getAllProfileDestinations = await backEndService.getProfile()
+		console.log('all destination of profile',getAllProfileDestinations)
 
 		console.log('alldestinations', allDestinations);
 
 		this.setState({
-			destinations: allDestinations
+			destinations: allDestinations,
+			// profileDestinations: getAllProfileDestinations
 		}, () => {console.log("state destinations", this.state.destinations);})
 
 	}
 
 	handleAddDestination = async formBody => {
-		const newDestination = await backEndService.create(formBody)
+		const newDestination = await backEndService.create(formBody);
+        
+		if(newDestination){
+		  console.log('ici')
+		  console.log('user state',this.state.user._id)
+			const d = await backEndService.createOrUpdateProfileDestination(this.state.user._id,newDestination._id )
+			console.log(`ici avec data ${d}`)
+		}
 		
 		this.setState({
 			destinations: [...this.state.destinations, newDestination]
@@ -122,6 +132,9 @@ class App extends Component {
 				</Route>
 				<Route exact path='/destinations'>
 					<Destinations profile={this.state.profile} profileDestinations={this.state.profileDestinations} />
+				</Route>
+				<Route exact path='/destination/:id'>
+					<DestinationDetail />
 				</Route>
 				<Route exact path='/login'>
 					<Login 

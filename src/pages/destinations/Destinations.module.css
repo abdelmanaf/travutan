@@ -23,3 +23,12 @@
     transform: skewY(1deg);
     cursor: pointer;
   }
+
+  .show {
+    height: 500px;
+    width: 500px;
+    margin: 5% auto;
+    background-color: orange;
+    text-align: center;
+    padding: 5%;
+}
